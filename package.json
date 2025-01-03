@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -27,6 +27,7 @@
     "@prisma/client": "6.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "nestjs-prisma": "^0.23.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "swagger-ui-express": "^5.0.1"
@@ -61,7 +62,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -69,8 +70,15 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^nestjs/new(|/.*)$": "<rootDir>/libs/new/src/$1"
+    }
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
